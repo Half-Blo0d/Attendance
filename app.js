@@ -2,12 +2,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require("express-session");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const studentRegistrationRouter = require('./routes/student_registration_ops');
 
 const app = express();
+app.use(session({
+    secret: "XIE",
+    saveUninitialized: false,
+    resave: false}));
 
 app.use(logger('dev'));
 app.use(express.json());

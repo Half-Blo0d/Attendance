@@ -5,54 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registration</title>
     <script src="/javascripts/angular.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 
 </head>
 <body>
-    <div class="bold-line"></div>
-    <div class='container'>
-        <div class='window'>
-            <div class= "overlay"></div>
-            <div class='content'>
-                <div class='welcome'>STUDENT REGISTRATION</div>
 
-                <div ng-app="studentRegistrationApp" ng-controller="studentRegistrationCtrl">
-                    <form name="regis" autocomplete="off">
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type="hidden" ng-model="_id">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input placeholder="*Full Name" type="text" ng-model="name" class='input-line full-width' autocomplete="off" required></td>
-                            </tr>
-                            <tr>
-                                <td><input placeholder='*Roll no' type="text" pattern="^[0-9]*$" ng-model="roll_no" class='input-line full-width' required></td>
-                            </tr>
-                            <tr>
-                            </tr>
-                            <tr>
-                                <td><input placeholder="*Phone no" type="text" pattern="^[0-9]*$" maxlength="10" minlength="10" autocomplete="off"  ng-model="phone_no" class='input-line full-width' required></td>
-                            </tr>
-                            <tr>
-                                <td><input placeholder="*Email" type="email" ng-model="email" class='input-line full-width' autocomplete="off" required></td>
-                            </tr>
-                            <tr>
-                                <td><input placeholder="*Password" type="password" ng-model="password" class='input-line full-width' autocomplete="off"  required></td>
-                            </tr>
-                            <tr>
-                                <td><button class="ghost-round full-width" ng-click="save()" >Create Account</button></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
+<div class="container" id="container">
+    <div class="form-container sign-up-container" ng-app="studentRegistrationApp" ng-controller="studentRegistrationCtrl">
+        <form name="regis" autocomplete="off">
+            <h1>Create Account</h1><br>
+            <input type="hidden" ng-model="_id">
+            <input placeholder="*Full Name" type="text" ng-model="name" required>
+            <input type="text" pattern="^[0-9]*$" ng-model="roll_no" placeholder="*Roll no" required>
+            <input placeholder="*Phone no" type="text" pattern="^[0-9]*$" maxlength="10" minlength="10" autocomplete="off"  ng-model="phone_no">
+            <input type="email" placeholder="*Email" ng-model="email" required>
+            <input type="password" placeholder="*Password" ng-model="password" required>
+
+            <button  ng-click="save()">Sign Up</button><br><br>
+            <span>*  Required</span>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form>
+            <h1>SIGN IN</h1><br>
+
+            <input type="text" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <button>Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hello,Friend</h1>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" id="signUp">Sign Up</button>
             </div>
         </div>
     </div>
+</div>
+
 <script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+
+
     let app = angular.module('studentRegistrationApp',[]);
     app.controller('studentRegistrationCtrl',function ($scope, $http){
 
