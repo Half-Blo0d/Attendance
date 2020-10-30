@@ -13,9 +13,11 @@ body {
   height: 100vh;
   margin: -20px 0 50px;
   background-image: url(https://images.unsplash.com/photo-1500993855538-c6a99f437aa7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
+
 
 h1 {
   font-weight: bold;
@@ -35,7 +37,7 @@ p {
 span {
   font-size: 12px;
   color: beige;
-  margin-left: 200px;
+
 }
 
 a {
@@ -196,7 +198,7 @@ button.ghost {
 
 .overlay {
 
-  background: linear-gradient(to right, #ff4b2b, #ff416c) no repeat 0 0 /cover;
+  background: linear-gradient(to right, #ff4b2b, #ff416c)no repeat 0 0 /cover;
   color: #fff;
   position: absolute;
   left: -100%;
@@ -204,6 +206,7 @@ button.ghost {
   width: 200%;
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
+
 }
 
 .overlay-panel {
@@ -261,4 +264,5 @@ button.ghost {
 .container.right-panel-active .overlay-right {
   transform: translateX(20%);
 }
+
 

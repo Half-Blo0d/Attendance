@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const path = require('path');
 const bodyParser = require('body-parser');
-const fs = require('fs')
+const fs = require('fs');
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: false}));
 
@@ -15,6 +16,7 @@ let con = mongoose.connection;
 con.on('error', ()=>{
     console.log('Connection Error');
 });
+
 
 router.get('/studentRegistrationManagement', (req, res)=>{
     res.sendFile(path.join(__dirname,'../public/student_registration_ops.html'))
@@ -44,5 +46,6 @@ router.post('/add-studentRegistration',(req,res)=>{
         });
     });
 });
+
 
 module.exports = router;

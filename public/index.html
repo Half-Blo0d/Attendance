@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Registration</title>
-  <script src="javascripts/angular.js"></script>
+  <script src="/javascripts/angular.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <link rel="stylesheet" href="stylesheets/style.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
 
 </head>
 <body>
-
+<div id="header"></div>
 <div class="container" id="container" ng-app="login" ng-controller="loginCtrl">
   <div class="form-container sign-up-container">
     <form name="regis" autocomplete="off">
@@ -22,15 +24,15 @@
       <input type="email" placeholder="*Email" ng-model="email" required>
       <input type="password" placeholder="*Password" ng-model="password" required>
 
-      <button ng-click="save()">Sign Up</button><br><br>
+      <button ng-click="save()">Sign Up</button><br>
       <span>*  Required</span>
     </form>
   </div>
   <div class="form-container sign-in-container" >
     <form>
       <h1>SIGN IN</h1><br>
-
-      <input type="text" placeholder="Email" ng-model="username">
+      <span>INPUT YOUR EMAIL ID AND PASSWORD</span>
+      <input type="email" placeholder="Email ID" ng-model="username">
       <input type="password" placeholder="Password" ng-model="pass">
       <button ng-click="login()">Sign In</button>
     </form>
@@ -63,13 +65,13 @@
       container.classList.remove("right-panel-active");
     });
 
-    let app =angular.module("login", []);
+
+  let app =angular.module("login", []);
     app.controller("loginCtrl", function ($scope, $http){
 
       $scope._id = '';
       $scope.name = '';
       $scope.roll_no = '';
-
       $scope.phone_no = '';
       $scope.email = '';
       $scope.password = '';
@@ -86,7 +88,6 @@
             _id: $scope._id,
             name: $scope.name,
             roll_no: $scope.roll_no,
-
             phone_no: $scope.phone_no,
             email: $scope.email,
             password: $scope.password
@@ -94,13 +95,12 @@
           }
           $http.post('http://localhost:3000/student_registration/update-studentRegistration',studentRegistration)
                   .then((response)=>{
-                    if(response.data.info == 'Record Updated'){
+                    if(response.data.info === 'Record Updated'){
                       console.log(response.data);
                       for(let i = 0; i < $scope.myData.length; i++ ){
-                        if($scope.myData[i]._id == $scope._id){
+                        if($scope.myData[i]._id === $scope._id){
                           $scope.myData[i].name = $scope.name;
                           $scope.myData[i].roll_no = $scope.roll_no;
-
                           $scope.myData[i].phone_no = $scope.phone_no;
                           $scope.myData[i].email = $scope.email;
                           $scope.myData[i].password = $scope.password;
@@ -119,7 +119,6 @@
             _id: '',
             name: $scope.name,
             roll_no: $scope.roll_no,
-
             phone_no: $scope.phone_no,
             email: $scope.email,
             password: $scope.password,
@@ -127,7 +126,7 @@
           }
           $http.post('http://localhost:3000/student_registration/add-studentRegistration',studentRegistration)
                   .then((response)=>{
-                    if(response.data.info == 'Record added'){
+                    if(response.data.info === 'Record added'){
                       alert('User Registration Successful')
                       console.log(response.data);
                       studentRegistration._id = response.data.obj._id;
@@ -138,28 +137,31 @@
       }
 
     $scope.login = function () {
-      let data = {
+      const data = {
         user: $scope.username,
         pass: $scope.pass
       }
 
       $http.post("http://localhost:3000/login", data).then( (response) => {
-        if(response.data.msg == "Login Successful"){
+        if(response.data.msg === "Login Successful"){
           let testLink = document.createElement('a');
           testLink.href = "http://localhost:3000/test/";
           document.body.append(testLink);
           testLink.click();
           document.body.removeChild(testLink);
-        } else{
+        }
+        else if(response.data.msg === "Admin Login"){
+          let testLink = document.createElement('a');
+          testLink.href = "http://localhost:3000/admin/";
+          document.body.append(testLink);
+          testLink.click();
+          document.body.removeChild(testLink);
+        }else{
           alert(response.data.msg);
         }
       });
     }
   });
-
-
-
-
 </script>
 </body>
 </html>

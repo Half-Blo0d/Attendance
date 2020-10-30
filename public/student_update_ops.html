@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script src="/javascripts/angular.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin_ops.html">WELCOME ADMIN</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/logout"><span ng-click="submit()" class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<center>
+    <div ng-app="studentUpdateApp" ng-controller="studentUpdateCtrl">
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form name="regis" autocomplete="off">
+            <h1>Create Account</h1><br>
+            <input type="hidden" ng-model="_id">
+            <input placeholder="*Full Name" type="text" ng-model="name" required>
+            <input type="text" pattern="^[0-9]*$" ng-model="roll_no" placeholder="*Roll no" required>
+            <input placeholder="*Phone no" type="text" pattern="^[0-9]*$" maxlength="10" minlength="10" autocomplete="off"  ng-model="phone_no">
+            <input type="email" placeholder="*Email" ng-model="email" required>
+            <input type="password" placeholder="*Password" ng-model="password" required>
+
+            <button  ng-click="save()">Sign Up</button><br><br>
+        </form>
+    </div>
+</div><br>
+    <div class="row mx-auto justify-content-center">
+        <table border="1px" >
+            <tr class="bg-dark text-white">
+                <td><h4>Name</h4></td>
+                <td><h4>Roll No</h4></td>
+                <td><h4>Phone Number</h4></td>
+                <td><h4>Email</h4></td>
+                <td><h4>Password</h4></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="record in myUpdate" class="bg-light text-dark">
+                <td><h4>{{record.name}}</h4></td>
+                <td><h4>{{record.roll_no}}</h4></td>
+                <td><h4>{{record.phone_no}}</h4></td>
+                <td><h4>{{record.email}}</h4></td>
+                <td><h4>{{record.password}}</h4></td>
+                <td><button class="bg-secondary text-light" ng-click="edit(record._id, record.name, record.roll_no, record.phone_no, record.email, record.password)"><h4>EDIT</h4></button></td>
+                <td><button class="bg-danger text-light" ng-click="delete(record._id)"><h4>DELETE</h4></button></td>
+            </tr>
+        </table>
+    </div>
+    </div>
+</center>
+<script>
+    let app = angular.module('studentUpdateApp',[]);
+    app.controller('studentUpdateCtrl',function ($scope, $http){
+
+        $scope._id = '';
+        $scope.name = '';
+        $scope.roll_no = '';
+        $scope.phone_no = '';
+        $scope.email = '';
+        $scope.password = '';
+
+        $http.get('http://localhost:3000/student_update/get-studentUpdate').then((response)=>{
+            console.log(response.data);
+            $scope.myUpdate = response.data;
+        });
+
+        $scope.clear = function () {
+            $scope._id = '';
+            $scope.name = '';
+            $scope.roll_no = '';
+            $scope.phone_no = '';
+            $scope.email = '';
+            $scope.password = '';
+        }
+
+        $scope.edit = function (_id, name, roll_no, phone_no, email, password) {
+            $scope._id = _id;
+            $scope.name = name;
+            $scope.roll_no = roll_no;
+            $scope.phone_no = phone_no;
+            $scope.email = email;
+            $scope.password = password;
+        }
+
+        $scope.delete = function(_id){
+            const studentUpdate = {
+                _id: _id
+            }
+            $http.post('http://localhost:3000/student_update/delete-studentUpdate', studentUpdate).then((response)=>{
+                if (response.data.msg === 'Record Deleted'){
+                    console.log(response.data);
+                    alert('Record Deleted')
+                    $scope.myUpdate = $scope.myUpdate.filter(plan => plan._id != _id);
+                }else{
+                    console.log(response.data);
+                    alert('Unable to delete the record')
+                }
+            });
+        }
+
+        $scope.save = function(){
+            if($scope._id.length > 0){
+                //edit
+                const studentUpdate = {
+                    _id: $scope._id,
+                    name: $scope.name,
+                    roll_no: $scope.roll_no,
+                    phone_no: $scope.phone_no,
+                    email: $scope.email,
+                    password: $scope.password
+                }
+                $http.post('http://localhost:3000/student_update/update-studentUpdate',studentUpdate)
+                    .then((response)=>{
+                        if(response.data.info === 'Record Updated'){
+                            console.log(response.data);
+                            for(let i = 0; i < $scope.myUpdate.length; i++ ){
+                                if($scope.myUpdate[i]._id === $scope._id){
+                                    $scope.myUpdate[i].name = $scope.name;
+                                    $scope.myUpdate[i].roll_no = $scope.roll_no;
+                                    $scope.myUpdate[i].phone_no = $scope.phone_no;
+                                    $scope.myUpdate[i].email = $scope.email;
+                                    $scope.myUpdate[i].password =$scope.password;
+                                }
+                            }
+                        }
+
+                    });
+            }else{
+                //add
+                const studentUpdate = {
+                    _id: '',
+                    name: $scope.name,
+                    roll_no: $scope.roll_no,
+                    phone_no: $scope.phone_no,
+                    email: $scope.email,
+                    password: $scope.password,
+                }
+                $http.post('http://localhost:3000/student_update/add-studentUpdate',studentUpdate)
+                    .then((response)=>{
+                        if(response.data.info === 'Record added'){
+                            alert('Added')
+                            console.log(response.data);
+                            studentUpdate._id = response.data.obj._id;
+                            $scope.myUpdate.push(studentUpdate);
+                        }
+                    });
+            }
+        }
+    });
+</script>
+</body>
+</html>
