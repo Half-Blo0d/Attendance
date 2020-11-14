@@ -16,11 +16,10 @@ con.on('error',()=>{
     console.log('Connection error');
 });
 
-router.get('/studentUpdateManagement',(req,res)=>{
-    res.sendFile(path.join(__dirname,'../public/student_update_ops.html'));
-});
+
+
 router.post('/delete-studentUpdate', (req , res)=>{
-    StudentUpdate.deleteOne({_id: req.body._id}, (err, doc)=>{
+    StudentUpdate.deleteOne({_id: req.body._id}, (err)=>{
         if(err){
             console.log(err);
             res.json({msg: 'Error'});
@@ -37,6 +36,7 @@ router.get('/get-studentUpdate',(req,res)=>{
         console.log(err);
     });
 });
+
 
 router.post('/add-studentUpdate',(req,res)=>{
     const studentUpdate = new StudentUpdate({
@@ -71,8 +71,20 @@ router.post('/update-studentUpdate',(req,res)=>{
             console.log(doc);
         }
 
-    })
-})
+    });
+});
 
+router.get("/admin", (req, res)=>{
+    console.log("Inside Test method");
+    let admin = req.session.reload();
+    console.log(admin.user);
+    if(admin.user){
+        const filePath = path.join(__dirname, '../public/admin_ops.html') ;
+        res.sendFile(filePath);
 
+    } else{
+        const filePath = path.join(__dirname, '../public/index.html') ;
+        res.sendFile(filePath);
+    }
+});
 module.exports = router;

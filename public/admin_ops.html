@@ -5,72 +5,87 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/styling.css">
     <title>Admin Panel</title>
+    <script>
+        $(function(){
+            $("#header").load("/header.html");
+        });
+    </script>
 </head>
-<style>
-    body {
-        font-family: "Lato", sans-serif;
-    }
 
-    .sidenav {
-        height: 100%;
-        width: 180px;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        padding-top: 50px;
-    }
 
-    .sidenav a {
-        padding: 6px 6px 6px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-    }
-
-    .sidenav a:hover {
-        color: #f1f1f1;
-    }
-
-    .main {
-        margin-left: 250px; /* Same as the width of the sidenav */
-    }
-
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-    }
-</style>
 <body>
-<nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">WELCOME ADMIN</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/logout"><span ng-click="submit()" class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-    </div>
-</nav>
-<div class="sidenav">
-    <a href="/student_update/studentUpdateManagement">Students</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-</div>
+
 <div class="main">
-    <h1>This is the admin page</h1>
+    <div id="header"></div><br><br><br>
+    <div class="welcome-area" id="welcome">
+
+
+        <!-- ***** Header Text Start ***** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
+                        <h1>WELCOME <strong>ADMIN</strong><br>Choose your option<strong></strong></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Header Text End ***** -->
+    </div>
+
+    <section class="section home-feature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
+                            <a href="/admin/studentUpdateManagement">
+                            <div class="features-small-item">
+                                <div class="icon">
+                                    <i><img src="/images/featured-item-01.png" alt=""></i>
+                                </div>
+                                <h5 class="features-title">Student Update</h5>
+
+                                <p>Modify, Delete & Add Student Data</p>
+                            </div></a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
+                            <a href="/admin/subjects">
+                            <div class="features-small-item">
+                                <div class="icon">
+                                    <i><img src="/images/featured-item-01.png" alt=""></i>
+                                </div>
+                                <h5 class="features-title">Subjects</h5>
+                                <p>To find the attendances of all the subjects</p>
+                            </div></a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
+                            <div class="features-small-item">
+                                <div class="icon">
+                                    <i><img src="/images/featured-item-01.png" alt=""></i>
+                                </div>
+                                <h5 class="features-title">Ultimate Marketing</h5>
+                                <p>You just need to tell your friends about our free templates</p>
+                            </div>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 </div>
 </body>
+
 </html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DBMS</title>
+    <script src="/javascripts/angular.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("/header.html");
+        });
+    </script>
+</head>
+<style>
+    body {
+        font-family: "Lato", sans-serif;
+    }
+
+    .sidenav {
+        height: 100%;
+        width: 180px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        padding-top: 50px;
+    }
+
+    .sidenav a {
+        padding: 6px 6px 6px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    .main {
+        margin-left: 250px; /* Same as the width of the sidenav */
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+</style>
+<body>
+<div id="header"></div><br><br><br>
+<div class="sidenav">
+    <a href="/admin/subjects/dbms">DBMS</a>
+    <a href="/admin/subjects/tcs">TCS</a>
+    <a href="/admin/subjects/aa">AA</a>
+    <a href="/admin/subjects/wdl">WDL</a>
+</div>
+<div class="main" ng-app="dbmsApp" ng-controller="dbmsCtrl">
+    <h1>This is the DBMS page</h1>
+    <form>
+    <label for="date">Select Date:</label>
+    <input type="text" placeholder="dd/mm/yyyy" id="date" name="date" ng-model="date">
+    <button ng-click="search()">Search</button>
+    </form>
+<center>
+    <div >
+        <table border="1px" >
+            <tr class="bg-dark text-white">
+                <td><h4>Name</h4></td>
+                <td><h4>Time</h4></td>
+                <td><h4>Roster</h4></td>
+                <td><h4>Subject</h4></td>
+                <td><h4>ID</h4></td>
+
+            </tr>
+            <tr ng-repeat="record in myUpdate">
+                <td><h4>{{record.name}}</h4></td>
+                <td><h4>{{record.time}}</h4></td>
+                <td><h4>{{record.roster}}</h4></td>
+                <td><h4>{{record.subject}}</h4></td>
+                <td><h4>{{record.id}}</h4></td>
+            </tr>
+        </table>
+    </div>
+</center>
+</div>
+
+<script>
+    let app = angular.module("dbmsApp", []);
+    app.controller("dbmsCtrl", function ($scope, $http) {
+        $scope.date = '';
+            $http.get('http://localhost:3000/admin/subjects/dbms/search', $scope.date).then((response) => {
+                console.log(response.data);
+                $scope.myUpdate = response.data;
+            });
+
+    });
+
+</script>
+</body>
+</html>

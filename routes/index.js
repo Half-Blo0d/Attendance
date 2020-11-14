@@ -17,9 +17,7 @@ con.on('error', ()=>{
   console.log('Connection Error');
 });
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+
 
 router.post('/login', (req,res)=> {
   console.log(req.body.user);
@@ -48,7 +46,7 @@ router.post('/login', (req,res)=> {
       req.session.save();
 
     }
-    else if(req.body.user === 'admin@root' && req.body.pass === 'admin'){
+    else if(req.body.user === 'a@a' && req.body.pass === 'a'){
       console.log('Admin Login');
       data.msg = "Admin Login";
       data.info = 'admin';
@@ -73,7 +71,7 @@ router.post('/login', (req,res)=> {
 
 router.get("/test", (req, res)=>{
   console.log("Inside Test method");
-  let sess = req.session;
+  let sess = req.session;  
   console.log(sess.user);
   if(sess.user){
     const filePath = path.join(__dirname, '../public/test.html') ;

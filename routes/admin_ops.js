@@ -16,6 +16,31 @@ con.on('error', ()=>{
     console.log('Connection Error');
 });
 
-router.get('/adminPageManagement', (req, res)=>{
-    res.sendFile(path.join(__dirname,'../public/admin_ops.html'))
+router.get("/studentUpdateManagement", (req, res)=>{
+    console.log("Inside Test method");
+    let admin = req.session;
+    console.log(admin.user);
+    if(admin.user){
+        const filePath = path.join(__dirname, '../public/student_update_ops.html') ;
+        res.sendFile(filePath);
+
+    } else{
+        const filePath = path.join(__dirname, '../public/index.html') ;
+        res.sendFile(filePath);
+    }
 });
+
+router.get("/subjects", (req, res)=>{
+    console.log("Inside Test method");
+    let admin = req.session;
+    console.log(admin.user);
+    if(admin.user){
+        const filePath = path.join(__dirname, '../public/subject_ops.html') ;
+        res.sendFile(filePath);
+
+    } else{
+        const filePath = path.join(__dirname, '../public/index.html') ;
+        res.sendFile(filePath);
+    }
+});
+module.exports = router;
