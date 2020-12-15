@@ -68,13 +68,26 @@ router.post('/login', (req,res)=> {
   });
 
 });
+router.get("/", (req, res)=>{
+  console.log("Inside Test method");
+  let admin = req.session;
+  console.log(admin.user);
+  if(admin.user){
+    const filePath = path.join(__dirname, '../public/admin_ops.html') ;
+    res.sendFile(filePath);
 
-router.get("/test", (req, res)=>{
+  } else{
+    const filePath = path.join(__dirname, '../public/index.html') ;
+    res.sendFile(filePath);
+  }
+});
+
+router.get("/user", (req, res)=>{
   console.log("Inside Test method");
   let sess = req.session;  
   console.log(sess.user);
   if(sess.user){
-    const filePath = path.join(__dirname, '../public/test.html') ;
+    const filePath = path.join(__dirname, '../public/user.html') ;
     res.sendFile(filePath);
 
   } else{

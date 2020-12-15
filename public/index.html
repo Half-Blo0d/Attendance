@@ -145,7 +145,7 @@
       $http.post("http://localhost:3000/login", data).then( (response) => {
         if(response.data.msg === "Login Successful"){
           let testLink = document.createElement('a');
-          testLink.href = "http://localhost:3000/test/";
+          testLink.href = "http://localhost:3000/user/";
           document.body.append(testLink);
           testLink.click();
           document.body.removeChild(testLink);

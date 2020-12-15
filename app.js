@@ -14,6 +14,7 @@ const dbmsRouter = require('./routes/subjects/dbms_ops');
 const wdlRouter = require('./routes/subjects/wdl_ops');
 const tcsRouter = require('./routes/subjects/tcs_ops');
 const aaRouter = require('./routes/subjects/aa_ops');
+const userRouter = require('./routes/user');
 
 
 
@@ -41,7 +42,7 @@ app.use('/admin/subjects/dbms',dbmsRouter);
 app.use('/admin/subjects/wdl',wdlRouter);
 app.use('/admin/subjects/tcs',tcsRouter);
 app.use('/admin/subjects/aa',aaRouter);
-
+app.use('/user',userRouter);
 
 
 

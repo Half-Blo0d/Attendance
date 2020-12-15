@@ -16,8 +16,10 @@ let con = mongoose.connection;
 con.on('error', ()=>{
     console.log('Connection Error');
 });
-router.get('/search',(req,res)=>{
-    attendances.find({subject: "WDL"}).then((response)=>{
+router.post('/search',(req,res)=>{
+    attendances.find({"time.string_date": req.body.date, subject: "WDL"}).then((response)=>{
+        console.log()
+
         res.json(response);
     }).catch((err)=>{
         console.log(err);

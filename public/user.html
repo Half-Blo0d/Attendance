@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/javascripts/angular.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/styling.css">
+
+
+</head>
+
+<body>
+<div class="main" ng-app="userApp" ng-controller="userCtrl">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Dashboard</a>
+        </div>
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a><span class="glyphicon glyphicon-user"></span>  {{myUpdate.name}}</a></li>
+            <li><a href="/logout"><span ng-click="submit()" class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+    </div>
+</nav><br><br>
+
+
+    <div class="welcome-area" id="welcome">
+
+        <center>
+        <!-- ***** Header Text Start ***** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-xl-3 col-xl-6 offset-lg-6 col-lg-8 col-md-12 col-sm-12">
+                        <h1>Hello {{myUpdate.name}}</h1>
+                        <h1>Select a subject</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </center>
+        <!-- ***** Header Text End ***** -->
+    </div>
+
+
+    <center>
+        <select name="subjectfilter" ng-click="subjectfilter()" id="subjectfilter">
+
+            <option value="null">-Select-</option>
+            <option value="DBMS">DBMS</option>
+            <option value="AA">AA</option>
+            <option value="OS">OS</option>
+            <option value="WDL">WDL</option>
+        </select>
+        <input type="button" ng-click="clear()" value="clear">
+
+        <table border="1px" >
+            <tr class="bg-dark text-white">
+                <td><h4>Name</h4></td>
+                <td><h4>Date</h4></td>
+                <td><h4>Roster</h4></td>
+                <td><h4>Subject</h4></td>
+                <td><h4>ID</h4></td>
+
+            </tr>
+            <tr ng-repeat="record in myData" class="bg-light text-dark">
+                <td><h4>{{record.name}}</h4></td>
+                <td><h4>{{record.time.string_date}}</h4></td>
+                <td><h4>{{record.roster}}</h4></td>
+                <td><h4>{{record.subject}}</h4></td>
+                <td><h4>{{record.id}}</h4></td>
+
+            </tr>
+        </table>
+    </center>
+    </div>
+
+
+</div>
+
+
+</div>
+<script>
+    let app = angular.module("userApp", []);
+    app.controller("userCtrl", function ($scope, $http) {
+            $http.get('http://localhost:3000/user/get-user').then((response)=>{
+                console.log(response.data);
+                $scope.myUpdate = response.data;
+            });
+        document.getElementById("subjectfilter").value = 'null'
+
+        $http.get('http://localhost:3000/user/get-user-info').then((response)=>{
+            console.log(response.data);
+            $scope.myData = response.data;
+        });
+        $scope.subjectfilter = function(){
+            let val = document.getElementById("subjectfilter").value
+            if(val == 'null'){}
+            else{
+                $scope.myData = $scope.myData.filter(prop => prop.subject == val);
+
+            }
+        }
+        $scope.clear = function (){
+            $http.get('http://localhost:3000/user/get-user-info').then((response)=>{
+                console.log(response.data);
+                $scope.myData = response.data;
+            });
+            document.getElementById("subjectfilter").value = 'null'
+        }
+    });
+
+</script>
+
+</body>
+</html>
+
+

@@ -100,6 +100,7 @@
                 $http.post('http://localhost:3000/student_registration/update-studentRegistration',studentRegistration)
                     .then((response)=>{
                         if(response.data.info == 'Record Updated'){
+                            alert('User Updated')
                             console.log(response.data);
                             for(let i = 0; i < $scope.myData.length; i++ ){
                                 if($scope.myData[i]._id == $scope._id){

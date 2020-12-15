@@ -62,14 +62,20 @@
 </div>
 <div class="main" ng-app="aaApp" ng-controller="aaCtrl">
     <h1>This is the AA page</h1>
-    <label for="birthday">Birthday:</label>
-    <input type="date" id="birthday" name="birthday">
+    <form>
+        <label for="date">Select Date:</label>
+        <input type="date"  id="date" name="date" ng-model="date">
+
+        <input type="hidden" value="{{ date | date : 'shortDate'}}" id="dte" >
+        <button ng-click="srch()">Search</button>
+    </form>
     <center>
         <div >
             <table border="1px" >
                 <tr class="bg-dark text-white">
                     <td><h4>Name</h4></td>
                     <td><h4>Time</h4></td>
+                    <td><h4>Date</h4></td>
                     <td><h4>Roster</h4></td>
                     <td><h4>Subject</h4></td>
                     <td><h4>ID</h4></td>
@@ -78,6 +84,7 @@
                 <tr ng-repeat="record in myUpdate">
                     <td><h4>{{record.name}}</h4></td>
                     <td><h4>{{record.time}}</h4></td>
+                    <td><h4>{{record.date}}</h4></td>
                     <td><h4>{{record.roster}}</h4></td>
                     <td><h4>{{record.subject}}</h4></td>
                     <td><h4>{{record.id}}</h4></td>
@@ -90,12 +97,18 @@
 <script>
     let app = angular.module("aaApp", []);
     app.controller("aaCtrl", function ($scope, $http) {
-        $scope.date = '';
+        $scope.srch = function () {
+            var datee= document.querySelector('#dte').value
+            const data = {
+                date: datee
+            }
+            console.log(datee);
+            $http.post('http://localhost:3000/admin/subjects/aa/search',data).then((response)=>{
+                console.log(response.data);
+                $scope.myUpdate = response.data;
+            });
+        }
 
-        $http.get('http://localhost:3000/admin/subjects/aa/search').then((response)=>{
-            console.log(response.data);
-            $scope.myUpdate = response.data;
-        });
 
     });
 

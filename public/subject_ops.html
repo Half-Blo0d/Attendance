@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/styling.css">
     <script>
         $(function(){
             $("#header").load("/header.html");
@@ -15,55 +16,92 @@
     </script>
 </head>
 <style>
-    body {
-        font-family: "Lato", sans-serif;
-    }
 
-    .sidenav {
-        height: 100%;
-        width: 180px;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        padding-top: 50px;
-    }
-
-    .sidenav a {
-        padding: 6px 6px 6px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-    }
-
-    .sidenav a:hover {
-        color: #f1f1f1;
-    }
-
-    .main {
-        margin-left: 250px; /* Same as the width of the sidenav */
-    }
-
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-    }
 </style>
 
 <body>
-<div id="header"></div><br><br><br>
-<div class="sidenav">
-    <a href="/admin/subjects/dbms">DBMS</a>
-    <a href="/admin/subjects/tcs">TCS</a>
-    <a href="/admin/subjects/aa">AA</a>
-    <a href="/admin/subjects/wdl">WDL</a>
-</div>
+
 <div class="main">
-    <h1>This is the subjects page</h1>
-</div>
+    <div id="header"></div><br><br><br>
+    <div class="welcome-area" id="welcome">
+
+
+        <!-- ***** Header Text Start ***** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-xl-3 col-xl-6 offset-lg-6 col-lg-8 col-md-12 col-sm-12">
+                        <h1>CHOOSE THE SUBJECT</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Header Text End ***** -->
+    </div>
+
+    <section class="section home-feature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
+                            <a href="/admin/subjects/dbms">
+                                <div class="features-small-item">
+                                    <div class="icon">
+                                        <i><img src="/images/language.png" alt=""></i>
+                                    </div>
+                                    <h5 class="features-title">Database Management</h5>
+                                    <p></p>
+                                </div></a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
+                            <a href="/admin/subjects/aa">
+                                <div class="features-small-item">
+                                    <div class="icon">
+                                        <i><img src="/images/language.png" alt=""></i>
+                                    </div>
+                                    <h5 class="features-title">Advance Algorithm</h5>
+                                    <p></p>
+                                </div></a>
+                        </div>
+                        <!-- ***** Features Small Item End ***** -->
+
+                        <!-- ***** Features Small Item Start ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
+                            <a href="/admin/subjects/tcs">
+                            <div class="features-small-item">
+                                <div class="icon">
+                                    <i><img src="/images/language.png" alt=""></i>
+                                </div>
+                                <h5 class="features-title">Operating Systems</h5>
+                                <p></p>
+                            </div></a>
+                        </div>
+
+                        <!-- ***** Features Small Item End ***** -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
+                            <a href="/admin/subjects/wdl">
+                            <div class="features-small-item">
+                                <div class="icon">
+                                    <i><img src="/images/language.png" alt=""></i>
+                                </div>
+                                <h5 class="features-title">Web Development Lab</h5>
+                                <p></p>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 </div>
 </body>
+
 </html>
+
