@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/subjects.css">
     <script>
         $(function(){
             $("#header").load("/header.html");
@@ -61,18 +62,20 @@
     <a href="/admin/subjects/wdl">WDL</a>
 </div>
 <div class="main" ng-app="wdlApp" ng-controller="wdlCtrl">
-    <h1>This is the WDL page</h1>
+    <h1>Web Development Lab</h1>
+    <h3>Choose the date for which you want the attendance</h3><br>
+    <center>
     <form>
         <label for="dte">Select Date:</label>
         <input type="date"  id="dte" name="date" ng-model="date">
 
 
-        <button ng-click="srch()">Search</button>
+        <button ng-click="srch()">Search</button><br><br>
     </form>
-    <center>
+
         <div >
             <table border="1px" >
-                <tr class="bg-dark text-white">
+                <tr class="tbl-header">
                     <td><h4>Name</h4></td>
                     <td><h4>Date</h4></td>
                     <td><h4>Roster</h4></td>

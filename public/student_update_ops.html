@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/table.css">
+
     <script>
         $(function(){
             $("#header").load("/header.html");
@@ -38,14 +40,14 @@
 </div><br>
     <div class="row mx-auto justify-content-center">
         <table border="1px" >
-            <tr class="bg-dark text-white">
-                <td><h4>Name</h4></td>
-                <td><h4>Roll No</h4></td>
-                <td><h4>Phone Number</h4></td>
-                <td><h4>Email</h4></td>
-                <td><h4>Password</h4></td>
-                <td></td>
-                <td></td>
+            <tr class="tbl-header">
+                <td><h4>NAME</h4></td>
+                <td><h4>ROLL NO</h4></td>
+                <td><h4>PHONE NUMBER</h4></td>
+                <td><h4>EMAIL</h4></td>
+                <td><h4>PASSWORD</h4></td>
+                <td><h4>EDIT</h4></td>
+                <td><h4>DELETE</h4></td>
             </tr>
             <tr ng-repeat="record in myUpdate" class="bg-light text-dark">
                 <td><h4>{{record.name}}</h4></td>
@@ -53,8 +55,10 @@
                 <td><h4>{{record.phone_no}}</h4></td>
                 <td><h4>{{record.email}}</h4></td>
                 <td><h4>{{record.password}}</h4></td>
-                <td><button class="bg-secondary text-light" ng-click="edit(record._id, record.name, record.roll_no, record.phone_no, record.email, record.password)"><h4>EDIT</h4></button></td>
-                <td><button class="bg-danger text-light" ng-click="delete(record._id)"><h4>DELETE</h4></button></td>
+                <div class="round">
+                <td><a class="btn blue" ng-click="edit(record._id, record.name, record.roll_no, record.phone_no, record.email, record.password)"><h4>EDIT</h4></a></td>
+                <td><a class="btn red" ng-click="delete(record._id)"><h4>DELETE</h4></a></td>
+                </div>
             </tr>
         </table>
     </div>

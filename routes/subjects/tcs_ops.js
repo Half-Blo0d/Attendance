@@ -17,7 +17,7 @@ con.on('error', ()=>{
     console.log('Connection Error');
 });
 router.post('/search',(req,res)=>{
-    attendances.find({date: req.body.date, subject: "OS"}).then((response)=>{
+    attendances.find({"time.string_date": req.body.date, subject: "TCS"}).then((response)=>{
 
         res.json(response);
     }).catch((err)=>{
